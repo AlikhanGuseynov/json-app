@@ -1,8 +1,7 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
-
+import {NgForm} from '@angular/forms';
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
@@ -51,19 +50,21 @@ export class PageComponent implements OnInit, AfterViewChecked {
 
   add(form?): void {
     // if (this.formModel.valid) {
-      this.addClick = true;
-      // const arr = this.key.split('.');
-      // this.parsingKey.first = arr[0];
-      // this.parsingKey.second = arr[1];
-      this.dataBase.object('keys/az/' + this.parsingKey.first).update({[this.parsingKey.second]: this.azvalue})
-        .then(_ => this.azvalue = this.key = this.parsingKey.second = '', this.addClick = false)
-        .catch(err => console.log(err, 'You dont have access!'));
-      this.dataBase.object('keys/ru/' + this.parsingKey.first).update({[this.parsingKey.second]: this.ruvalue})
-        .then(_ => this.ruvalue = '')
-        .catch(err => console.log(err, 'You dont have access!'));
-      this.dataBase.object('keys/en/' + this.parsingKey.first).update({[this.parsingKey.second]: this.envalue})
-        .then(_ => this.envalue = '')
-        .catch(err => console.log(err, 'You dont have access!'));
+    this.addClick = true;
+    // const arr = this.key.split('.');
+    // this.parsingKey.first = arr[0];
+    // this.parsingKey.second = arr[1];
+    this.dataBase.object('keys/az/' + this.parsingKey.first).update({[this.parsingKey.second]: this.azvalue})
+      .then(_ => {
+        this.azvalue = this.key = this.parsingKey.second = '', this.addClick = false;
+      })
+      .catch(err => console.log(err, 'You dont have access!'));
+    this.dataBase.object('keys/ru/' + this.parsingKey.first).update({[this.parsingKey.second]: this.ruvalue})
+      .then(_ => this.ruvalue = '')
+      .catch(err => console.log(err, 'You dont have access!'));
+    this.dataBase.object('keys/en/' + this.parsingKey.first).update({[this.parsingKey.second]: this.envalue})
+      .then(_ => this.envalue = '')
+      .catch(err => console.log(err, 'You dont have access!'));
     // }
   }
 
