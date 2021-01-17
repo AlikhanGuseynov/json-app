@@ -1,4 +1,4 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
@@ -32,6 +32,8 @@ export class PageComponent implements OnInit, AfterViewChecked {
     }
   };
   addClick = false;
+  @ViewChild('newRow') formModel: ngForm;
+
   constructor(
     private firesServices: AngularFirestore,
     private dataBase: AngularFireDatabase,
@@ -47,22 +49,22 @@ export class PageComponent implements OnInit, AfterViewChecked {
     this.changeRef.detectChanges();
   }
 
-  add(form): void {
-    console.log(form.valid);
-    console.log(form);
-    this.addClick = true;
-    const arr = this.key.split('.');
-    this.parsingKey.first = arr[0];
-    this.parsingKey.second = arr[1];
-    this.dataBase.object('keys/az/' + this.parsingKey.first).update({[this.parsingKey.second]: this.azvalue})
-      .then(_ => this.azvalue = this.key = '')
-      .catch(err => console.log(err, 'You dont have access!'));
-    this.dataBase.object('keys/ru/' + this.parsingKey.first).update({[this.parsingKey.second]: this.ruvalue})
-      .then(_ => this.ruvalue = '')
-      .catch(err => console.log(err, 'You dont have access!'));
-    this.dataBase.object('keys/en/' + this.parsingKey.first).update({[this.parsingKey.second]: this.envalue})
-      .then(_ => this.envalue = '')
-      .catch(err => console.log(err, 'You dont have access!'));
+  add(form?): void {
+    // if (this.formModel.valid) {
+      this.addClick = true;
+      // const arr = this.key.split('.');
+      // this.parsingKey.first = arr[0];
+      // this.parsingKey.second = arr[1];
+      this.dataBase.object('keys/az/' + this.parsingKey.first).update({[this.parsingKey.second]: this.azvalue})
+        .then(_ => this.azvalue = this.key = this.parsingKey.second = '', this.addClick = false)
+        .catch(err => console.log(err, 'You dont have access!'));
+      this.dataBase.object('keys/ru/' + this.parsingKey.first).update({[this.parsingKey.second]: this.ruvalue})
+        .then(_ => this.ruvalue = '')
+        .catch(err => console.log(err, 'You dont have access!'));
+      this.dataBase.object('keys/en/' + this.parsingKey.first).update({[this.parsingKey.second]: this.envalue})
+        .then(_ => this.envalue = '')
+        .catch(err => console.log(err, 'You dont have access!'));
+    // }
   }
 
   list(): void {
@@ -107,7 +109,7 @@ export class PageComponent implements OnInit, AfterViewChecked {
   copyFirst(): void {
     if (this.azvalue) {
       this.envalue = this.ruvalue = this.azvalue;
-      // this.add();
+      this.add();
     }
   }
 }

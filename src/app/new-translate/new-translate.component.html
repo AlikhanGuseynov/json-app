@@ -1,0 +1,50 @@
+<div class="container-fluid">
+
+  <div class="row mt-3">
+
+    <div class="col-2">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Key</span>
+        </div>
+        <input pattern="/^[a-zA-Z0-9\._]*$/" name="newKey" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Az</span>
+        </div>
+        <input [(ngModel)]="az" name="newKey" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Ru</span>
+        </div>
+        <input [(ngModel)]="ru" name="newKey" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">En</span>
+        </div>
+        <input [(ngModel)]="en" name="newKey" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="col-1">
+      <button (click)="set()" type="button" class="btn btn-primary">
+        SET
+      </button>
+    </div>
+
+  </div>
+
+
+</div>

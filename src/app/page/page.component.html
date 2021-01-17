@@ -14,7 +14,15 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="key">Key</span>
             </div>
-            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="key"
+            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="parsingKey.second"
+                   [ngClass]="{'error-input': keyModel.invalid && addClick}"
+                   type="text" class="form-control" aria-label="Small" aria-describedby="newKey">
+          </div>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="key">Key</span>
+            </div>
+            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="parsingKey.first"
                    [ngClass]="{'error-input': keyModel.invalid && addClick}"
                    type="text" class="form-control" aria-label="Small" aria-describedby="newKey">
           </div>
@@ -154,10 +162,8 @@
       </ng-container>
     </ng-container>
 
-
-
   </div>
 
-
-
 </div>
+
+
