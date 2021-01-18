@@ -23,9 +23,10 @@ export class NewTranslateComponent implements OnInit {
 
   set(): void {
 
+    this.translate.setTranslation('en', {TITLE: 'Select date', SELECT: 'Seç'}, true);
+
     this.http.get('assets/i18n/en.json')
       .subscribe(res => {
-        this.translate.setTranslation('en', {TITLE: 'Select date', SELECT: 'Seç'}, true);
         console.log(res);
         // this.translate.get('ADD')
         //   .subscribe(res => {

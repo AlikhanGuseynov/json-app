@@ -2,6 +2,7 @@ import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, View
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {NgForm} from '@angular/forms';
+
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
@@ -31,7 +32,7 @@ export class PageComponent implements OnInit, AfterViewChecked {
     }
   };
   addClick = false;
-  @ViewChild('newRow') formModel: ngForm;
+  @ViewChild('newRow') formModel: NgForm;
 
   constructor(
     private firesServices: AngularFirestore,
@@ -42,6 +43,10 @@ export class PageComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.list();
+
+    localStorage.setItem('key', 'value');
+    localStorage.getItem('key');
+    localStorage.clear();
   }
 
   ngAfterViewChecked(): void {
