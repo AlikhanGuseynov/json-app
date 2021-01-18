@@ -62,7 +62,7 @@ export class PageComponent implements OnInit, AfterViewChecked {
     // }
 
     this.azValue = '';
-    this.secondKeyPart = '';
+    // this.secondKeyPart = '';
     this.addClick = false;
   }
 
