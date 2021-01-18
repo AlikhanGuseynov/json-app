@@ -12,17 +12,17 @@
         <div class="col-2">
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="key">Key</span>
+              <span class="input-group-text">2-key</span>
             </div>
-            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="parsingKey.second"
+            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="secondKeyPart"
                    [ngClass]="{'error-input': keyModel.invalid && addClick}"
                    type="text" class="form-control" aria-label="Small" aria-describedby="newKey">
           </div>
           <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="key">Key</span>
+              <span class="input-group-text" id="key">1-key</span>
             </div>
-            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="parsingKey.first"
+            <input required pattern="^[a-zA-Z0-9_.]+$" #keyModel="ngModel" name="newKey" [(ngModel)]="firstKeyPart"
                    [ngClass]="{'error-input': keyModel.invalid && addClick}"
                    type="text" class="form-control" aria-label="Small" aria-describedby="newKey">
           </div>
@@ -33,7 +33,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-sm">Az</span>
             </div>
-            <input required name="azValue" #azValueModel='ngModel' [(ngModel)]="azvalue"
+            <input required name="azValue" #azValueModel='ngModel' [(ngModel)]="azValue"
                    [ngClass]="{'error-input': azValueModel.invalid && addClick}"
                    type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
           </div>
@@ -44,7 +44,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing">Ru</span>
             </div>
-            <input required name="ruValue" #ruValueModel='ngModel' [(ngModel)]="ruvalue" type="text" class="form-control"
+            <input required name="ruValue" #ruValueModel='ngModel' [(ngModel)]="ruValue" type="text" class="form-control"
                    [ngClass]="{'error-input': ruValueModel.invalid && addClick}"
                    aria-label="Small" aria-describedby="inputGroup-sizing">
           </div>
@@ -55,7 +55,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup">En</span>
             </div>
-            <input required name="enValue" #enValueModel="ngModel" [(ngModel)]="envalue" type="text" class="form-control"
+            <input required name="enValue" #enValueModel="ngModel" [(ngModel)]="enValue" type="text" class="form-control"
                    [ngClass]="{'error-input': enValueModel.invalid && addClick}"
                    aria-label="Small" aria-describedby="inputGroup">
           </div>

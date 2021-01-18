@@ -11,27 +11,21 @@ import {NgForm} from '@angular/forms';
 export class PageComponent implements OnInit, AfterViewChecked {
 
   key: string;
-  azvalue: string;
-  ruvalue: string;
-  envalue: string;
-  parsingKey = {
-    first: '',
-    second: ''
-  };
+  azValue: string;
+  ruValue: string;
+  enValue: string;
+  // parsingKey = {
+  //   first: '',
+  //   second: ''
+  // };
+  firstKeyPart = '';
+  secondKeyPart = '';
   valid = false;
   keyRows = [];
   copy = [];
   editingKey = '';
-  editingItem: any = {
-    azvalue: '',
-    ruvalue: '',
-    envalue: '',
-    key: {
-      first: '',
-      second: ''
-    }
-  };
   addClick = false;
+
   @ViewChild('newRow') formModel: NgForm;
 
   constructor(
@@ -43,10 +37,6 @@ export class PageComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.list();
-
-    localStorage.setItem('key', 'value');
-    localStorage.getItem('key');
-    localStorage.clear();
   }
 
   ngAfterViewChecked(): void {
@@ -54,24 +44,29 @@ export class PageComponent implements OnInit, AfterViewChecked {
   }
 
   add(form?): void {
+
     // if (this.formModel.valid) {
     this.addClick = true;
     // const arr = this.key.split('.');
     // this.parsingKey.first = arr[0];
     // this.parsingKey.second = arr[1];
-    this.dataBase.object('keys/az/' + this.parsingKey.first).update({[this.parsingKey.second]: this.azvalue})
-      .then(_ => {
-        this.azvalue = this.key = this.parsingKey.second = '', this.addClick = false;
-      })
+    this.dataBase.object('keys/az/' + this.firstKeyPart).update({[this.secondKeyPart]: this.azValue})
+      .then(_ => this.azValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
-    this.dataBase.object('keys/ru/' + this.parsingKey.first).update({[this.parsingKey.second]: this.ruvalue})
-      .then(_ => this.ruvalue = '')
+    this.dataBase.object('keys/ru/' + this.firstKeyPart).update({[this.secondKeyPart]: this.ruValue})
+      .then(_ => this.ruValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
-    this.dataBase.object('keys/en/' + this.parsingKey.first).update({[this.parsingKey.second]: this.envalue})
-      .then(_ => this.envalue = '')
+    this.dataBase.object('keys/en/' + this.firstKeyPart).update({[this.secondKeyPart]: this.enValue})
+      .then(_ => this.enValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
     // }
+
+    this.azValue = '';
+    this.secondKeyPart = '';
+    this.addClick = false;
   }
+
+
 
   list(): void {
     this.dataBase.list('keys').valueChanges()
@@ -98,23 +93,24 @@ export class PageComponent implements OnInit, AfterViewChecked {
       this.list();
       return false;
     }
+
     this.dataBase.object('keys/az/' + firstKey).update({[secondKey]: eventAZ})
-      .then(_ => this.envalue = '')
+      .then(_ => this.enValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
 
     this.dataBase.object('keys/ru/' + firstKey).update({[secondKey]: eventRU})
-      .then(_ => this.envalue = '')
+      .then(_ => this.enValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
 
     this.dataBase.object('keys/en/' + firstKey).update({[secondKey]: eventEn})
-      .then(_ => this.envalue = '')
+      .then(_ => this.enValue = '')
       .catch(err => console.log(err, 'You dont have access!'));
     this.editingKey = '';
   }
 
   copyFirst(): void {
-    if (this.azvalue) {
-      this.envalue = this.ruvalue = this.azvalue;
+    if (this.azValue) {
+      this.enValue = this.ruValue = this.azValue;
       this.add();
     }
   }
